@@ -13,9 +13,13 @@
         tools:ignore="GoogleAppIndexingWarning,RtlEnabled"
         tools:targetApi="donut">
         <activity
+            android:name=".Course_Home_pageActivity"
+            android:label="@string/title_activity_course__home_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".AddCoursesActivity"
             android:label="@string/title_activity_add_courses"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".About_Me_Activity"
             android:label="@string/title_activity_about__me_"
