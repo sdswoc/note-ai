@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "235019857077",
+    "firebase_url": "https://noteai.firebaseio.com",
+    "project_id": "noteai",
+    "storage_bucket": "noteai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235019857077:android:07013832eb01d5b206e2fc",
+        "android_client_info": {
+          "package_name": "com.example.noteai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235019857077-0lkvn0aaht5l7ovv909n6h6i1alst2tc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.noteai",
+            "certificate_hash": "2707f252fd3d62ca31a3ea8f40426361b217ab32"
+          }
+        },
+        {
+          "client_id": "235019857077-rtcsjj0udjgornprmss1sjikq33qlh6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.noteai",
+            "certificate_hash": "22c68109db456625b885db79809a88a4440c9da5"
+          }
+        },
+        {
+          "client_id": "235019857077-439h9dvfmbvrtlm6rnirn7aj2ovgq221.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfxCOg4QcPgIOILDuCvm2P2VaIkw091vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235019857077-439h9dvfmbvrtlm6rnirn7aj2ovgq221.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
