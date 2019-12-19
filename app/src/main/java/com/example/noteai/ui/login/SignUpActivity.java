@@ -2,9 +2,11 @@ package com.example.noteai.ui.login;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,110 +25,106 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.noteai.HomeActivity;
 import com.example.noteai.R;
 import com.example.noteai.ui.login.LoginViewModel;
 import com.example.noteai.ui.login.LoginViewModelFactory;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
-
-    private LoginViewModel loginViewModel;
+    EditText mName, mEnrolment, mBranch, mYear, mPass, mConfirmPass, mRecovery;
+    Button mSignUp;
+    FirebaseAuth fAuth;
+    ProgressBar progressBar;
+    TextView mLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
-
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
-            }
-        });
-
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
-
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        mLogin=findViewById(R.id.textView26);
+        mName = findViewById(R.id.name);
+        mEnrolment = findViewById(R.id.enrolmentno);
+        mBranch = findViewById(R.id.branch);
+        mYear = findViewById(R.id.year);
+        mPass = findViewById(R.id.password);
+        mConfirmPass = findViewById(R.id.confirm_password);
+        mRecovery = findViewById(R.id.recovery_email);
+        fAuth=FirebaseAuth.getInstance();
+        progressBar=findViewById(R.id.loading);
+        mSignUp=findViewById(R.id.sign_up);
+        if(fAuth.getCurrentUser()!=null)
+        {startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        finish();}
+        mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
-    }
+        mSignUp.setOnClickListener(new View.OnClickListener() {
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-    }
+            @Override
+            public void onClick(View v) {
+                String name=mName.getText().toString().trim();
+                String enrolment=mEnrolment.getText().toString().trim();
+                String branch=mBranch.getText().toString().trim();
+                String year=mYear.getText().toString().trim();
+                String pass=mPass.getText().toString().trim();
+                String confirmpass=mConfirmPass.getText().toString().trim();
+                String recovery=mRecovery.getText().toString().trim();
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(name))
+                {
+                    mName.setError("Name is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(enrolment))
+                {
+                    mEnrolment.setError("Enrolment No. is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(branch))
+                {
+                    mBranch.setError("Branch is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(year))
+                {
+                    mYear.setError("Year is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(pass))
+                {
+                    mPass.setError("Password is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(confirmpass))
+                {
+                    mConfirmPass.setError("Password doesn't match");
+                    return;
+                }
+                if(TextUtils.isEmpty(recovery))
+                {
+                    mRecovery.setError("Recovery Email is Required");
+                    return;
+                }
+                progressBar.setVisibility(View.VISIBLE);
+                fAuth.createUserWithEmailAndPassword(enrolment,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(SignUpActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));}
+                        else{
+                            Toast.makeText(SignUpActivity.this, "Error has occured"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 }
