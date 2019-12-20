@@ -16,15 +16,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText mName, mEnrolment, mBranch, mYear, mPass, mConfirmPass, mRecovery;
-    Button mSignUp;
-    FirebaseAuth fAuth;
-    ProgressBar progressBar;
-    TextView mLogin;
+    private EditText mName, mEnrolment, mBranch, mYear, mPass, mConfirmPass, mRecovery;
+    private Button mSignUp;
+    private FirebaseAuth fAuth;
+    private ProgressBar progressBar;
+    private TextView mLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
         mSignUp=findViewById(R.id.sign_up);
         if(fAuth.getCurrentUser()!=null)
         {startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-        finish();}
+            finish();}
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,13 +100,17 @@ public class SignUpActivity extends AppCompatActivity {
                 fAuth.createUserWithEmailAndPassword(enrolment,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(SignUpActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));}
-                        else{
-                            Toast.makeText(SignUpActivity.this, "Error has occured"+ Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                       Toast.makeText(SignUpActivity.this,"Account created successfully"+task.isSuccessful(),Toast.LENGTH_SHORT).show();
+                   progressBar.setVisibility(View.GONE);
+                    if(!task.isSuccessful())
+                    {
+                    Toast.makeText(SignUpActivity.this,"Authentication Failed"+task.getException(),Toast.LENGTH_SHORT).show();
                     }
+                    else
+                        {
+                            startActivity(new Intent(SignUpActivity.this,HomeActivity.class));
+                            finish();
+                        }}
                 });
             }
         });
