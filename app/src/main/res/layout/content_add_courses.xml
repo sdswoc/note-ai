@@ -16,7 +16,9 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -28,7 +30,9 @@
         android:layout_marginEnd="175dp"
         android:textColor="#191970"
         android:textSize="45dp"
-        android:text="Note.AI" />
+        android:text="Note.AI"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="175dp" />
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
@@ -45,8 +49,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="Enter Course Code:"
-        android:textSize="30dp"/>
+        android:textAlignment="center"
+        android:text="Enter Code of new course to register:"
+        android:textSize="25dp"/>
 
     <EditText
         android:id="@+id/course_code"
@@ -54,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="165dp"
         android:ems="10"
         android:inputType="textCapCharacters"
         android:hint="HSN-000B"
@@ -67,9 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="225dp"
         android:text="OR"
-        android:textSize="40dp"/>
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/textView20"
@@ -77,9 +82,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="270dp"
         android:text="Select a course from the pre-registered course list:"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textAlignment="center"/>
 
     <Spinner
@@ -91,7 +96,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="330dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
 
     <Button
         android:id="@+id/button"
@@ -99,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="230dp"
+        android:layout_marginBottom="250dp"
         android:text="REGISTER"
         android:textSize="40dp"
         android:background="#87CEFA"

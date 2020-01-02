@@ -13,19 +13,19 @@
     tools:context=".ui.login.LoginActivity">
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/username_login"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="400dp"
-        android:hint="Enrolment Number"
+        android:hint="Email"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_login"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -39,28 +39,17 @@
         android:selectAllOnFocus="true" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginbtn"
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="230dp"
         android:background="#87CEFA"
-        android:enabled="false"
         android:textSize="30dp"
         android:text="@string/login"
         android:textColor="#000000"
         tools:ignore="RelativeOverlap" />
-
-    <ProgressBar
-        android:id="@+id/load"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:visibility="invisible"
-        android:layout_marginBottom="70dp"
-        />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -71,7 +60,9 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="-150dp"
         app:srcCompat="@drawable/logo"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -83,7 +74,9 @@
         android:layout_marginTop="20dp"
         android:text="@string/note_ai"
         android:textColor="#191970"
-        android:textSize="45sp" />
+        android:textSize="45sp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="150dp" />
 
     <TextView
         android:id="@+id/textView25"

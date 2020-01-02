@@ -22,7 +22,9 @@
         android:layout_marginBottom="470dp"
         android:hint="Name"
         android:inputType="textPersonName"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="11dp" />
 
     <EditText
         android:id="@+id/enrolmentno"
@@ -35,7 +37,9 @@
         android:layout_marginBottom="410dp"
         android:hint="Enrolment No."
         android:inputType="textNoSuggestions"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="11dp" />
     <EditText
         android:id="@+id/branch"
         android:layout_width="370dp"
@@ -47,7 +51,9 @@
         android:layout_marginBottom="350dp"
         android:hint="Branch"
         android:inputType="textNoSuggestions"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="11dp" />
     <EditText
         android:id="@+id/year"
         android:layout_width="370dp"
@@ -59,7 +65,9 @@
         android:layout_marginBottom="290dp"
         android:hint="Year"
         android:inputType="textNoSuggestions"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="11dp" />
     <EditText
         android:id="@+id/password"
         android:layout_width="370dp"
@@ -71,7 +79,9 @@
         android:layout_marginBottom="230dp"
         android:hint="Password"
         android:inputType="textNoSuggestions"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="11dp" />
     <EditText
         android:id="@+id/confirm_password"
         android:layout_width="370dp"
@@ -83,9 +93,11 @@
         android:layout_marginBottom="170dp"
         android:hint="Confirm Password"
         android:inputType="textNoSuggestions"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="11dp" />
     <EditText
-        android:id="@+id/recovery_email"
+        android:id="@+id/email"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -93,9 +105,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="11dp"
         android:layout_marginBottom="110dp"
-        android:hint="Recovery Email"
+        android:hint="Email"
         android:inputType="textNoSuggestions"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="11dp" />
     <Button
         android:id="@+id/sign_up"
         android:layout_width="120dp"
@@ -103,21 +117,11 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:enabled="false"
         android:background="#87CEFA"
         android:textSize="20dp"
         android:textColor="#000000"
         android:text="Sign Up" />
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:visibility="invisible"
-        android:layout_marginBottom="15dp"
-         />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -127,7 +131,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="90dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="90dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -139,7 +145,9 @@
         android:layout_marginEnd="120dp"
         android:textColor="#191970"
         android:text="Note.AI"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="120dp" />
 
     <TextView
         android:id="@+id/textView26"
