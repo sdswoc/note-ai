@@ -6,9 +6,14 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,6 +28,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AddCoursesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 private Button mAdd;
@@ -36,11 +42,11 @@ private ProgressDialog mProgress;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_courses);
         mAdd=findViewById(R.id.button);
+        mList=findViewById(R.id.spinner);
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Courses");
         mProgress = new ProgressDialog(this);
         mCourse=findViewById(R.id.course_code);
-        mList=findViewById(R.id.spinner);
-
+        mAuth=FirebaseAuth.getInstance();
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +55,7 @@ private ProgressDialog mProgress;
                 mProgress.show();
                 if(!TextUtils.isEmpty(code)){
                     String user_id=mAuth.getCurrentUser().getUid();
-                    DatabaseReference new_course=mDatabase.child(user_id);
+                    DatabaseReference new_course=mDatabase.push();
                     new_course.child("Code").setValue(code);
                     new_course.child("UID").setValue(user_id);
                     mProgress.dismiss();
@@ -57,14 +63,27 @@ private ProgressDialog mProgress;
                 }
             }
         });
+        Query query=mDatabase.orderByChild("Code");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<String> courses=new ArrayList<String>();
+                for(DataSnapshot courseSnapshot:dataSnapshot.getChildren()){
+                    String courseName=courseSnapshot.child("Code").getValue(String.class);
+                    courses.add(courseName);
+                }
+                ArrayAdapter<String> dataAdapter=new ArrayAdapter<String>(AddCoursesActivity.this,android.R.layout.simple_spinner_item,courses);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mList.setAdapter(dataAdapter);
+            }
 
-        mList.setOnItemSelectedListener(AddCoursesActivity.this);
-        List<String> categories=new ArrayList<String>();
-        categories.add("HSN-001B");
-        categories.add("HSN-001A");
-        ArrayAdapter<String> dataAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mList.setAdapter(dataAdapter);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

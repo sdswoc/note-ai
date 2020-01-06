@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.noteai">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -16,11 +17,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,RtlEnabled"
         tools:targetApi="LOLLIPOP">
-        <activity android:name=".Personal_Notes"></activity>
-        <activity
-            android:name=".Course_Home_pageActivity"
-            android:label="@string/title_activity_course__home_page"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".View_PDF_Files"></activity>
+        <activity android:name=".PdfConverter" />
+        <activity android:name=".CourseHomePage" />
+        <activity android:name=".Personal_Notes" />
         <activity
             android:name=".AddCoursesActivity"
             android:label="@string/title_activity_add_courses"

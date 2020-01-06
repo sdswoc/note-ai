@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.noteai"
-        minSdkVersion 16
+        minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -27,7 +27,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.firebaseui:firebase-ui-database:0.4.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
