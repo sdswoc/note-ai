@@ -48,7 +48,7 @@ List<UploadPDF> uploadPDFS;
     }
 
     private void viewAllFiles() {
-        databaseReference= FirebaseDatabase.getInstance().getReference("uploads");
+        databaseReference= FirebaseDatabase.getInstance().getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

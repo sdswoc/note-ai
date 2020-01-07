@@ -82,7 +82,7 @@ public class PdfConverter extends AppCompatActivity {
                     while (!uri.isComplete());
                     Uri url=uri.getResult();
                     UploadPDF uploadPDF=new UploadPDF(editText.getText().toString(),url.toString());
-                    databaseReference.child(databaseReference.push().getKey()).setValue(uploadPDF);
+                    databaseReference.child(databaseReference.child("uploads").push().getKey()).setValue(uploadPDF);
                     Toast.makeText(PdfConverter.this, "File Uploaded", Toast.LENGTH_SHORT).show();
 
                 }
