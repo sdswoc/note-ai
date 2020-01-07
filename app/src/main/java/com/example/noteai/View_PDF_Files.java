@@ -39,16 +39,15 @@ List<UploadPDF> uploadPDFS;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UploadPDF uploadPDF=uploadPDFS.get(position);
-                Intent intent=new Intent();
-                intent.setType(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(uploadPDF.getUrl()));
-                startActivity(intent);
+                Intent MyIntent = new Intent(Intent.ACTION_VIEW);
+                MyIntent.setData(Uri.parse(uploadPDF.getUrl()));
+                startActivity(MyIntent);
             }
         });
     }
 
     private void viewAllFiles() {
-        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference= FirebaseDatabase.getInstance().getReference("uploads");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -71,8 +71,6 @@ public class PdfConverter extends AppCompatActivity {
     }
 
     private void uploadPDFFile(Uri data) {
-
-
         StorageReference reference=storageReference.child("uploads/"+System.currentTimeMillis()+".pdf");
         reference.putFile(data)
             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -82,7 +80,7 @@ public class PdfConverter extends AppCompatActivity {
                     while (!uri.isComplete());
                     Uri url=uri.getResult();
                     UploadPDF uploadPDF=new UploadPDF(editText.getText().toString(),url.toString());
-                    databaseReference.child(databaseReference.child("uploads").push().getKey()).setValue(uploadPDF);
+                    databaseReference.child("uploads").push().setValue(uploadPDF);
                     Toast.makeText(PdfConverter.this, "File Uploaded", Toast.LENGTH_SHORT).show();
 
                 }
