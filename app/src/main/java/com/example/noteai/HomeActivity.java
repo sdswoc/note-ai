@@ -21,19 +21,11 @@ public class HomeActivity extends AppCompatActivity {
         mPersonal=findViewById(R.id.button6);
         mAdd=findViewById(R.id.button4);
         mView=findViewById(R.id.button5);
-        mMy=findViewById(R.id.my_account);
         mPdf=findViewById(R.id.button7);
         mPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(HomeActivity.this,PdfConverter.class);
-                startActivity(intent);
-            }
-        });
-        mMy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(HomeActivity.this,About_Me_Activity.class);
                 startActivity(intent);
             }
         });
