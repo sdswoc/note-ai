@@ -56,6 +56,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email=mEmail.getText().toString().trim();
                 String pass=mPass.getText().toString().trim();
+                if(TextUtils.isEmpty(email))
+                {
+                    Toast.makeText(LoginActivity.this,"Please enter your Email-ID",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(pass))
+                {
+                    Toast.makeText(LoginActivity.this,"Please enter your Password",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if(!TextUtils.isEmpty(email)&&!TextUtils.isEmpty(pass)){
                     mProgress.setMessage("Logging in");
                     mProgress.show();

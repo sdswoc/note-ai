@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.noteai.HomeActivity;
 import com.example.noteai.R;
@@ -74,6 +75,30 @@ public class SignUpActivity extends AppCompatActivity {
                 final String password = mPass.getText().toString().trim();
                 final String confirmpass = mConfirmPass.getText().toString().trim();
                 final String email = mEmail.getText().toString().trim();
+                if(TextUtils.isEmpty(name))
+                {
+                    Toast.makeText(SignUpActivity.this,"Please enter your Name",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(enrolment))
+                {
+                    Toast.makeText(SignUpActivity.this,"Please enter your Enrolment Number",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(password))
+                {
+                    Toast.makeText(SignUpActivity.this,"Please enter a Password",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(!password.equals(confirmpass))
+                {
+                    Toast.makeText(SignUpActivity.this,"Passwords don't match",Toast.LENGTH_LONG).show();
+                }
+                if(TextUtils.isEmpty(email))
+                {
+                    Toast.makeText(SignUpActivity.this,"Please enter an Email",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(enrolment)&&!TextUtils.isEmpty(branch)&&!TextUtils.isEmpty(year)&&!TextUtils.isEmpty(password)&&!TextUtils.isEmpty(confirmpass)&&!TextUtils.isEmpty(email))
                 mProgress.setMessage("Signing Up");
                 mProgress.show();
