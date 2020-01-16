@@ -17,7 +17,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,RtlEnabled"
         tools:targetApi="LOLLIPOP">
-        <activity android:name=".View_PDF_Files"></activity>
+        <activity android:name=".View_Course_Home_Page"></activity>
+        <activity android:name=".HomePagePersonalNotes" />
+        <activity android:name=".ViewRegisteredCourses" />
+        <activity android:name=".View_PDF_Files" />
         <activity android:name=".PdfConverter" />
         <activity android:name=".CourseHomePage" />
         <activity android:name=".Personal_Notes" />

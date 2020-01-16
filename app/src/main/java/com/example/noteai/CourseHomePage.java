@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -15,12 +16,15 @@ import android.widget.TextView;
 public class CourseHomePage extends AppCompatActivity {
 private RecyclerView mNotesList;
 private DatabaseReference mDatabase;
+    private FirebaseAuth mAuthenticate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_home_page);
+        mAuthenticate=FirebaseAuth.getInstance();
+        String auser_id=mAuthenticate.getCurrentUser().getUid();
         mNotesList=findViewById(R.id.notes_list);
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("Personal Notes");
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Personal Notes").child(auser_id);
         mNotesList.setHasFixedSize(true);
         mNotesList.setLayoutManager(new LinearLayoutManager(CourseHomePage.this));
     }
@@ -37,6 +41,8 @@ private DatabaseReference mDatabase;
                 noteViewHolder.setTitle(notes.getTitle());
                 noteViewHolder.setName(notes.getName());
                 noteViewHolder.setDate(notes.getDate());
+                noteViewHolder.setMain(notes.getMain());
+                noteViewHolder.setSummary(notes.getSummary());
             }
         };
         mNotesList.setAdapter(FirebaseRecyclerAdapter);
@@ -58,6 +64,14 @@ private DatabaseReference mDatabase;
         public void setDate(String date){
             TextView post_date=(TextView) mView.findViewById(R.id.time);
             post_date.setText(date);
+        }
+        public void setMain(String main){
+            TextView post_title=(TextView) mView.findViewById(R.id.maint);
+            post_title.setText(main);
+        }
+        public void setSummary(String summary){
+            TextView post_title=(TextView) mView.findViewById(R.id.summary);
+            post_title.setText(summary);
         }
     }
 }

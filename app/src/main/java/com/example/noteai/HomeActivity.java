@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         mPersonal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomeActivity.this,Personal_Notes.class);
+                Intent intent=new Intent(HomeActivity.this,HomePagePersonalNotes.class);
                 startActivity(intent);
             }
         });

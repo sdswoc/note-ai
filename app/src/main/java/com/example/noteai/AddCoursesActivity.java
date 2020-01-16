@@ -1,6 +1,7 @@
 package com.example.noteai;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ import java.util.Map;
 
 public class AddCoursesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 private Button mAdd;
-private Spinner mList;
+private TextView mCheck;
 private EditText mCourse;
 private FirebaseAuth mAuth;
 private DatabaseReference mDatabase;
@@ -42,11 +44,18 @@ private ProgressDialog mProgress;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_courses);
         mAdd=findViewById(R.id.button);
-        mList=findViewById(R.id.spinner);
+        mCheck=findViewById(R.id.textView20);
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Courses");
         mProgress = new ProgressDialog(this);
         mCourse=findViewById(R.id.course_code);
         mAuth=FirebaseAuth.getInstance();
+        mCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AddCoursesActivity.this,ViewRegisteredCourses.class);
+                startActivity(intent);
+            }
+        });
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,25 +72,7 @@ private ProgressDialog mProgress;
                 }
             }
         });
-        Query query=mDatabase.orderByChild("Code");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> courses=new ArrayList<String>();
-                for(DataSnapshot courseSnapshot:dataSnapshot.getChildren()){
-                    String courseName=courseSnapshot.child("Code").getValue(String.class);
-                    courses.add(courseName);
-                }
-                ArrayAdapter<String> dataAdapter=new ArrayAdapter<String>(AddCoursesActivity.this,android.R.layout.simple_spinner_item,courses);
-                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                mList.setAdapter(dataAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        
 
 
     }

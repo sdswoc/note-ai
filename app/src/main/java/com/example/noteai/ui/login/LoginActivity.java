@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else {
                                 mProgress.dismiss();
-                                Toast.makeText(LoginActivity.this,"Error Logging in",Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this,"Error Logging in.Please Check your Internet Connection.",Toast.LENGTH_LONG).show();
                             }
                         }
                     });

@@ -34,7 +34,8 @@ public class Personal_Notes extends AppCompatActivity {
         mSummary=findViewById(R.id.editText4);
         mDialog=new ProgressDialog(this);
         mAdd=findViewById(R.id.button2);
-        mDatabase_personal= FirebaseDatabase.getInstance().getReference().child("Personal Notes");
+        String auser_id=mAuthenticate.getCurrentUser().getUid();
+        mDatabase_personal= FirebaseDatabase.getInstance().getReference().child("Personal Notes").child(auser_id);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +53,7 @@ public class Personal_Notes extends AppCompatActivity {
                     new_note.child("Title").setValue(title);
                     new_note.child("Date").setValue(date);
                     new_note.child("Name").setValue(name);
-                    new_note.child("Main Notes").setValue(main);
+                    new_note.child("Main").setValue(main);
                     new_note.child("Keywords").setValue(keyword);
                     new_note.child("Summary").setValue(summary);
                     new_note.child("UID").setValue(auser_id);
